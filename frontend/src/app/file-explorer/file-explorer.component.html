@@ -1,0 +1,24 @@
+<div class="file-explorer">
+  <div class="explorer-header">
+    <h4>Explorer</h4>
+    <div class="actions">
+      <button (click)="newFile.emit()" title="New File">
+        <i class="pi pi-file"></i>
+      </button>
+      <button (click)="newFolder.emit()" title="New Folder">
+        <i class="pi pi-folder"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="file-tree">
+    @for (node of files(); track node.path) {
+      <app-file-tree-node
+        [node]="node"
+        [level]="0"
+        (fileSelect)="fileSelect.emit($event)"
+        (nodeToggle)="nodeToggle.emit($event)"
+      />
+    }
+  </div>
+</div>

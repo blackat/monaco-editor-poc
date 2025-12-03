@@ -1,0 +1,61 @@
+<div class="editor-page">
+  <div class="toolbar">
+    <h3>Java Code Editor</h3>
+
+    <div class="toolbar-actions">
+      <button (click)="formatCode()">
+        <i class="pi pi-file-edit"></i> Format
+      </button>
+
+      <button (click)="loadTemplate('class')">
+        <i class="pi pi-file"></i> Class Template
+      </button>
+
+      <button (click)="loadTemplate('interface')">
+        <i class="pi pi-file"></i> Interface Template
+      </button>
+
+      <button (click)="loadTemplate('main')">
+        <i class="pi pi-play"></i> Main Method
+      </button>
+
+      <button (click)="toggleTheme()">
+        <i class="pi pi-moon"></i> {{ currentTheme() === 'vs-dark' ? 'Light' : 'Dark' }}
+      </button>
+
+      <label>
+        Font Size:
+        <input
+          type="number"
+          [(ngModel)]="fontSize"
+          (change)="updateFontSize()"
+          min="10"
+          max="24"
+          style="width: 60px;"/>
+      </label>
+    </div>
+  </div>
+
+  <div class="editor-wrapper">
+    <app-monaco-editor
+      [code]="javaCode()"
+      [language]="'java'"
+      [theme]="currentTheme()"
+      [options]="editorOptions()"
+      (codeChange)="onCodeChange($event)"
+      (editorReady)="onEditorReady($event)"
+    />
+  </div>
+
+  <div class="info-panel">
+    <div class="info-item">
+      <strong>Lines:</strong> {{ lineCount() }}
+    </div>
+    <div class="info-item">
+      <strong>Characters:</strong> {{ charCount() }}
+    </div>
+    <div class="info-item">
+      <strong>Language:</strong> Java
+    </div>
+  </div>
+</div>

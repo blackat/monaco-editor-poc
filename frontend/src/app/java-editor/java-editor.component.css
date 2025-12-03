@@ -1,0 +1,75 @@
+.editor-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--p-surface-0);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--p-surface-50);
+  border-bottom: 1px solid var(--p-surface-200);
+}
+
+.toolbar h3 {
+  margin: 0;
+  color: var(--p-text-color);
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.toolbar button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--p-surface-300);
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.toolbar button:hover {
+  background: var(--p-surface-100);
+}
+
+.toolbar label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 14px;
+}
+
+.editor-wrapper {
+  flex: 1;
+  border: 1px solid var(--p-surface-200);
+  margin: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.info-panel {
+  display: flex;
+  gap: 2rem;
+  padding: 0.75rem 1rem;
+  background: var(--p-surface-50);
+  border-top: 1px solid var(--p-surface-200);
+  font-size: 14px;
+}
+
+.info-item {
+  color: var(--p-text-color);
+}
+
+.info-item strong {
+  margin-right: 0.5rem;
+  color: var(--p-text-muted-color);
+}

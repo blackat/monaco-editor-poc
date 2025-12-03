@@ -1,0 +1,25 @@
+<div class="editor-page">
+  <div class="toolbar">
+    <button (click)="changeLanguage('typescript')">TypeScript</button>
+    <button (click)="changeLanguage('javascript')">JavaScript</button>
+    <button (click)="changeLanguage('json')">JSON</button>
+    <button (click)="changeLanguage('html')">HTML</button>
+    <button (click)="toggleTheme()">Toggle Theme</button>
+    <button (click)="formatCode()">Format</button>
+  </div>
+
+  <app-monaco-editor
+    [code]="code()"
+    [language]="language()"
+    [theme]="theme()"
+    [readOnly]="false"
+    (codeChange)="onCodeChange($event)"
+    (editorReady)="onEditorReady($event)"
+    class="editor-wrapper"
+  />
+
+  <div class="output">
+    <h3>Current Code:</h3>
+    <pre>{{ code() }}</pre>
+  </div>
+</div>

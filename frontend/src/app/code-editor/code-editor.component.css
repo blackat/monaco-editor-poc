@@ -1,0 +1,48 @@
+.editor-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 1rem;
+}
+
+.toolbar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: var(--p-surface-50);
+  border-radius: 6px;
+}
+
+.toolbar button {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--p-surface-300);
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+}
+
+.toolbar button:hover {
+  background: var(--p-surface-100);
+}
+
+.editor-wrapper {
+  flex: 1;
+  border: 1px solid var(--p-surface-300);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.output {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--p-surface-50);
+  border-radius: 6px;
+  max-height: 200px;
+  overflow: auto;
+}
+
+pre {
+  margin: 0;
+  font-size: 0.875rem;
+}

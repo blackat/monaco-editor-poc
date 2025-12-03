@@ -1,0 +1,37 @@
+<div class="tree-node" [style.padding-left.rem]="level() * 1">
+  <div
+    class="node-content"
+    [class.selected]="node().selected"
+    (click)="onNodeClick()">
+
+    @if (node().type === 'folder') {
+      <i
+        class="pi toggle-icon"
+        [class.pi-chevron-right]="!node().expanded"
+        [class.pi-chevron-down]="node().expanded"
+        (click)="onToggle($event)">
+      </i>
+    } @else {
+      <span class="file-spacer"></span>
+    }
+
+    <i class="pi node-icon"
+       [class.pi-folder]="node().type === 'folder' && !node().expanded"
+       [class.pi-folder-open]="node().type === 'folder' && node().expanded"
+       [class]="getFileIcon()">
+    </i>
+
+    <span class="node-label">{{ node().name }}</span>
+  </div>
+
+  @if (node().type === 'folder' && node().expanded && node().children) {
+    @for (child of node().children; track child.path) {
+      <app-file-tree-node
+        [node]="child"
+        [level]="level() + 1"
+        (fileSelect)="fileSelect.emit($event)"
+        (nodeToggle)="nodeToggle.emit($event)"
+      />
+    }
+  }
+</div>

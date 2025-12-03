@@ -1,0 +1,81 @@
+<div class="editor-container">
+  <!-- Sidebar with File Explorer -->
+  <div class="sidebar" [class.collapsed]="sidebarCollapsed()">
+    @if (!sidebarCollapsed()) {
+      <app-file-explorer
+        [files]="fileTree()"
+        (fileSelect)="onFileSelect($event)"
+        (nodeToggle)="onNodeToggle($event)"
+        (newFile)="onNewFile()"
+        (newFolder)="onNewFolder()"
+      />
+    }
+  </div>
+
+  <!-- Main Editor Area -->
+  <div class="main-area">
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <button (click)="toggleSidebar()" class="sidebar-toggle">
+        <i class="pi" [class.pi-bars]="sidebarCollapsed()" [class.pi-times]="!sidebarCollapsed()"></i>
+      </button>
+
+      @if (currentFile()) {
+        <div class="breadcrumb">
+          <i class="pi pi-file"></i>
+          <span>{{ currentFile()?.path }}</span>
+        </div>
+
+        <div class="toolbar-actions">
+          <button (click)="saveFile()" [disabled]="!hasChanges()">
+            <i class="pi pi-save"></i> Save
+          </button>
+          <button (click)="formatCode()">
+            <i class="pi pi-file-edit"></i> Format
+          </button>
+        </div>
+      }
+    </div>
+
+    <!-- Editor -->
+    <div class="editor-area">
+      @if (currentFile()) {
+        <app-monaco-editor
+          [code]="editorContent()"
+          [language]="getLanguage()"
+          [theme]="'vs-dark'"
+          [options]="editorOptions"
+          (codeChange)="onCodeChange($event)"
+          (editorReady)="onEditorReady($event)"
+        />
+      } @else {
+        <div class="empty-state">
+          <i class="pi pi-file"></i>
+          <p>No file selected</p>
+          <p class="hint">Select a file from the explorer to start editing</p>
+        </div>
+      }
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+      @if (currentFile()) {
+        <div class="status-item">
+          <span>{{ getLanguage() }}</span>
+        </div>
+        <div class="status-item">
+          <span>Line {{ cursorPosition().line }}, Col {{ cursorPosition().column }}</span>
+        </div>
+        <div class="status-item">
+          <span>{{ editorContent().length }} characters</span>
+        </div>
+        @if (hasChanges()) {
+          <div class="status-item modified">
+            <i class="pi pi-circle-fill"></i>
+            <span>Modified</span>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>
